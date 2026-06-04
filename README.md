@@ -73,6 +73,18 @@ is EXTREMELY FAST. Will need to be tested on Windows and adjusted as needed.
 
 > Note: This will also build the latest image if there have been any changes.
 
+## Adding custom sources
+
+If you want to add a new source file, or to include a new include directory
+you can do so, but you need to edit the `custom.mk` file in the root of your
+project. TODO: add an example here.
+
+## Cleaning the project
+
+```bash
+build-utils/clean.sh
+```
+
 ## LSP Support
 
 In order to have the LSP Support you need to provide the LSP with the relevant

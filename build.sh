@@ -6,7 +6,7 @@ if [[ "$FSRA_MAKE" == "" || "$FSRA_COMPILEDB" == "" ]]; then
 fi
 
 # add the custom sources and includes
-if ! grep -q "include custom.mk" Makefile; then
+if [[ -f "custom.mk" ]] && ! grep -q "include custom.mk" Makefile; then
     sed -i '/# list of objects/i include custom.mk\n' Makefile
 fi
 
