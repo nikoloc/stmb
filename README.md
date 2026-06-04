@@ -31,7 +31,7 @@ you first need to setup the `build-utils` submodule and the required environment
 If the repository is brand new, then you need to setup the submodule as
 
 ```bash
-git submodule add <dodati-kad-bude-aktivno-negde> build-utils
+git submodule add git@github.com:nikoloc/fsra-build-utils.git build-utils
 ```
 
 Else, if the repository already contains the submodule, you just need to
