@@ -31,21 +31,21 @@ you first need to setup the `build-utils` submodule and the required environment
 If the repository is brand new, then you need to setup the submodule as
 
 ```bash
-    git submodule add <dodati-kad-bude-aktivno-negde> build-utils
+git submodule add <dodati-kad-bude-aktivno-negde> build-utils
 ```
 
 Else, if the repository already contains the submodule, you just need to
 initialize it
 
 ```bash
-    git submodule update --init --recursive
+git submodule update --init --recursive
 ```
 
 Next, you need to provide the system with the required binaries. If you are on
 Linux, then you can do so easily by running
 
 ```bash
-    source build-utils/env/linux.sh
+source build-utils/env/linux.sh
 ```
 
 If you are on Windows, then we will figure it out later. Check the current notes
@@ -57,7 +57,7 @@ but we should be able to just reuse the Linux version. Will need to test so.
 You can build the image by running
 
 ```bash
-    build-utils/build.sh
+build-utils/build.sh
 ```
 
 ## Flashing
@@ -65,7 +65,7 @@ You can build the image by running
 In order to flash the image onto a MCU, you need to run
 
 ```bash
-    build-utils/flash.sh
+build-utils/flash.sh
 ```
 
 This script is just a wrapper around the `openocd`. It is tested on Linux and
@@ -78,4 +78,4 @@ is EXTREMELY FAST. Will need to be tested on Windows and adjusted as needed.
 In order to have the LSP Support you need to provide the LSP with the relevant
 info about the project in `compile_commands.json`. We use `compiledb` in order
 to generate it from our Makefile, which is included in our build step. It should
-by default in VSCode and Neovim.
+work by default in VSCode and Neovim.
