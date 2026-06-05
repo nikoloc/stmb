@@ -77,7 +77,20 @@ is EXTREMELY FAST. Will need to be tested on Windows and adjusted as needed.
 
 If you want to add a new source file, or to include a new include directory
 you can do so, but you need to edit the `custom.mk` file in the root of your
-project. TODO: add an example here.
+project. For more documentation and an example fragment code take a look at
+`examples/custom.mk`.
+
+## Submodules
+
+You can vendor another submodule into the project be following the next two
+rules:
+
+- The submodule needs to have the top-level `module.mk` Makefile fragment
+  specifying its sources, includes, flags etc.
+- The main project needs to include the appropriate `module.mk` into its own
+  `custom.mk`.
+
+For an example, checkout `examples/module.mk` and `examples/custom.mk`.
 
 ## Cleaning the project
 
