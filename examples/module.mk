@@ -16,6 +16,3 @@ C_INCLUDES += -I$(ROOT_DIR)Core/Inc
 # And sources for compilation
 C_SOURCES += $(ROOT_DIR)Core/Src/main.c \
 			 # other
-
-# Include the CoreLib as a submodule, see notes for the submodule initialization.
-include CoreLib/module.mk

@@ -23,3 +23,6 @@ Core/Src/can.c \
 
 # Linker flags
 # LDFLAGS += \
+
+# Include the CoreLib as a submodule, see notes for the submodule initialization.
+include CoreLib/module.mk
