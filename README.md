@@ -26,13 +26,15 @@ All the relevant actions can be found in the provided bash scripts.
 ## Setup
 
 After making or obtaining a project and installing the software required above,
-you first need to setup the `build-utils` submodule and the required environment.
+you first need to setup the `fsra-build` submodule and the required environment.
 
 If the repository is brand new, then you need to setup the submodule as
 
 ```bash
-git submodule add git@github.com:nikoloc/fsra-build-utils.git build-utils
+git submodule add git@github.com:nikoloc/fsra-build.git b
 ```
+
+This will initialize the submodule into a directory called `b` (so its less to type).
 
 Else, if the repository already contains the submodule, you just need to
 initialize it
@@ -45,7 +47,7 @@ Next, you need to provide the system with the required binaries. If you are on
 Linux, then you can do so easily by running
 
 ```bash
-source build-utils/env/linux.sh
+source b/env/linux.sh
 ```
 
 If you are on Windows, then we will figure it out later. Check the current notes
@@ -57,7 +59,7 @@ but we should be able to just reuse the Linux version. Will need to test so.
 You can build the image by running
 
 ```bash
-build-utils/build.sh
+b/build.sh
 ```
 
 ## Flashing
@@ -65,7 +67,7 @@ build-utils/build.sh
 In order to flash the image onto a MCU, you need to run
 
 ```bash
-build-utils/flash.sh
+b/flash.sh
 ```
 
 This script is just a wrapper around the `openocd`. It is tested on Linux and
@@ -95,7 +97,7 @@ For an example, checkout `examples/module.mk` and `examples/custom.mk`.
 ## Cleaning the project
 
 ```bash
-build-utils/clean.sh
+b/clean.sh
 ```
 
 ## LSP Support
@@ -104,3 +106,12 @@ In order to have the LSP Support you need to provide the LSP with the relevant
 info about the project in `compile_commands.json`. We use `compiledb` in order
 to generate it from our Makefile, which is included in our build step. It should
 work by default in VSCode and Neovim.
+
+## TODO
+
+- Test the process on Windows and MacOS. Add more documentation for those platforms.
+- Add debugger support with an appropiate script or similar.
+- Add `.vscode.json` for better integration with `Visual Studio Code`, for quick
+  actions, debugger etc.
+- Add module support for the `CoreLib` and test the integration with the existing
+  project.
