@@ -8,4 +8,4 @@ fi
 
 # flash it using openocd. NOTE: currently the family of stm32f0x is hardcoded, but i do think that all of our chips are of this kind.
 # anyway, we might want to add that as a configuration option in the future.
-$FSRA_OPENOCD -f interface/stlink.cfg -f target/stm32f0x.cfg -c "program build/$FSRA_PROJECT_NAME.elf verify reset exit"
+$FSRA_OPENOCD -f interface/stlink.cfg -f "target/$FSRA_STM_FAMILY" -c "program build/$FSRA_PROJECT_NAME.elf verify reset exit"
