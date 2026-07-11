@@ -1,6 +1,9 @@
+#! /usr/bin/bash
+
 set -e
+
 if [[ "$FSRA_MAKE" == "" ]]; then
-    echo "required environment setup not found. have you ran the appropriate env_*.sh script?"
+    echo "required environment variables not found. have you setup you environment?"
     exit 1
 fi
 

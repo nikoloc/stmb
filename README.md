@@ -43,6 +43,26 @@ initialize it
 git submodule update --init --recursive
 ```
 
+You will then need to setup the envirnoment for they build system. This is
+currently done by setting the following environment variables:
+
+- `FSRA_PROJECT_NAME` - Needs to be the same as the project name specified in
+  `CubeMX`.
+
+- `FSRA_STM_FAMILY` - Family of microcontroller, info used by `openocd`
+  in order to properly flash the code onto a mcu. The full list of supported hardware
+  can be found in the installation directory of `openocd`, on Linux that being
+  `/usr/share/openocd/scripts/target`. It needs to match the name of the file without
+  the `.cfg` extension.
+
+These variables need not be searched for everytime you want to build a project,
+but will instead by provided on project creation in form of a `project.sh` bash
+script, that you can source from before building, like this
+
+```bash
+source project.sh
+```
+
 Next, you need to provide the system with the required binaries. If you are on
 Linux, then you can do so easily by running
 
@@ -73,7 +93,8 @@ b/flash.sh
 This script is just a wrapper around the `openocd`. It is tested on Linux and
 is EXTREMELY FAST. Will need to be tested on Windows and adjusted as needed.
 
-> Note: This will also build the latest image if there have been any changes.
+> Note: This will not build the latest image if there have been any changes. You
+> need to do that before manually.
 
 ## Adding custom sources
 
