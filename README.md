@@ -65,8 +65,19 @@ script, that you can source from before building, like this
 source project.sh
 ```
 
-Next, you need to provide the system with the required binaries. If you are on
-a Unix system, Mac or Linux, then you can do so easily by running
+Next, you need to provide the system with the required binaries. The build system
+depends on the next few binaries, which should be installed and their executable
+names set in the following environment variables:
+
+- `FSRA_MAKE` - The standard `make` build system.
+- `FSRA_COMPILEDB` - [compiledb](https://github.com/nickdiego/compiledb) used
+  for the LSP support inside of code editors.
+- `FSRA_OPENOCD` - [openocd](https://openocd.org/) - cross-platform tool used to
+  flash our code onto a board.
+- `FSRA_TIO` - [tio](https://github.com/tio/tio) Optional. Unix only program for
+  serial communication over UART, used only in the `uart.sh` script.
+
+If you are on a Unix system, MacOS or Linux, then you can do so easily by running
 
 ```bash
 source b/env/unix.sh
@@ -134,6 +145,11 @@ In order to have the LSP Support you need to provide the LSP with the relevant
 info about the project in `compile_commands.json`. We use `compiledb` in order
 to generate it from our Makefile, which is included in our build step. It should
 work by default in VSCode and Neovim.
+
+## Example
+
+For the example usage of the build system check out
+[this demo program](https://github.com/nikoloc/can-debugger).
 
 ## TODO
 
