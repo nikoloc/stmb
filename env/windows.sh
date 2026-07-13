@@ -1,4 +1,4 @@
-# figure out a way to have the user specify the paths to the appropriate binaries, since they are, unlike for the linux version,
+# figure out a way to have the user specify the paths to the appropriate binaries, since they are, unlike for the unix version,
 # almost always going to be stored differently on different machines. this file may be of use if we install binaries system-wide on windows,
 # or vendor them directly into the repository as binary blobs.
 export FSRA_MAKE=...

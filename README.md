@@ -55,6 +55,8 @@ currently done by setting the following environment variables:
   `/usr/share/openocd/scripts/target`. It needs to match the name of the file without
   the `.cfg` extension.
 
+- `FSRA_UART_BAUDRATE` - Baudrate for the UART device communication
+
 These variables need not be searched for everytime you want to build a project,
 but will instead by provided on project creation in form of a `project.sh` bash
 script, that you can source from before building, like this
@@ -64,15 +66,20 @@ source project.sh
 ```
 
 Next, you need to provide the system with the required binaries. If you are on
-Linux, then you can do so easily by running
+a Unix system, Mac or Linux, then you can do so easily by running
 
 ```bash
-source b/env/linux.sh
+source b/env/unix.sh
 ```
 
-If you are on Windows, then we will figure it out later. Check the current notes
-in `env/linux.sh` and `env/windows.sh`. We will also need to add one for the MacOS,
-but we should be able to just reuse the Linux version. Will need to test so.
+since the Unix binary names are fairly standardized.
+
+> This next section needs to be tested and expended.
+
+For Windows users, the idea is for everyone working on a project to have a private
+`env.sh` script, which is gitignored, where you can dump you local configuration
+and then source it when working on a project. This is a bit of a hasle to setup
+initially, but you will only have to do it once.
 
 ## Building
 
@@ -132,7 +139,6 @@ work by default in VSCode and Neovim.
 
 - Test the process on Windows and MacOS. Add more documentation for those platforms.
 - Add debugger support with an appropiate script or similar.
-- Add `.vscode.json` for better integration with `Visual Studio Code`, for quick
-  actions, debugger etc.
-- Add module support for the `CoreLib` and test the integration with the existing
-  project.
+- Add `.vscode` shenanigans for better integration with `Visual Studio Code`,
+  for quick actions, debugger etc.
+- Test `uart.sh` and write a function for searching for the right ports.
