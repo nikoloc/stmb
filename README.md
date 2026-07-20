@@ -55,7 +55,9 @@ currently done by setting the following environment variables:
   `/usr/share/openocd/scripts/target`. It needs to match the name of the file without
   the `.cfg` extension.
 
-- `FSRA_UART_BAUDRATE` - Baudrate for the UART device communication
+- `FSRA_UART_BAUDRATE` - Baudrate for the UART device communication. Only needed
+  if the `uart.sh` is to be used for communication. If other software is used,
+  e.g. HTerm, it can be left undefined.
 
 These variables need not be searched for everytime you want to build a project,
 but will instead by provided on project creation in form of a `project.sh` bash
@@ -74,20 +76,26 @@ names set in the following environment variables:
   for the LSP support inside of code editors.
 - `FSRA_OPENOCD` - [openocd](https://openocd.org/) - cross-platform tool used to
   flash our code onto a board.
-- `FSRA_TIO` - [tio](https://github.com/tio/tio) Optional. Unix only program for
+- `FSRA_TIO` - [tio](https://github.com/tio/tio) Optional Unix only program for
   serial communication over UART, used only in the `uart.sh` script.
 
-If you are on a Unix system, MacOS or Linux, then you can do so easily by running
+If you are on a Unix system, MacOS or Linux, you should install these binaries
+using a package manager and then sourcing the provided `env.sh` script.
 
 ```bash
-source b/env/unix.sh
+source b/env.sh
 ```
 
 since the Unix binary names are fairly standardized.
 
 > This next section needs to be tested and expended.
 
-For Windows users, the idea is for everyone working on a project to have a private
+If you are on Windows, then the recommended way is to setup a package manager,
+such as `scoop`, and install the required sofware through it. That way you get
+full compatibility with Unix systems, and can get away with just sourcing the
+same `env.sh` file through GitBash (installed by default with Git).
+
+The other idea is for everyone working on a project to have a private
 `env.sh` script, which is gitignored, where you can dump you local configuration
 and then source it when working on a project. This is a bit of a hasle to setup
 initially, but you will only have to do it once.

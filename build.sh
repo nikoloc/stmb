@@ -12,8 +12,4 @@ if ! grep -q "\-include custom.mk" Makefile; then
     sed -i '/# list of objects/i -include custom.mk\n' Makefile
 fi
 
-if ! grep -q "\-include custom.mk" Makefile; then
-    sed -i '/# list of objects/i -include custom.mk\n' Makefile
-fi
-
 $FSRA_COMPILEDB $FSRA_MAKE
