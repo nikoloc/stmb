@@ -8,4 +8,4 @@ if [[ "$FSRA_OPENOCD" == "" || "$FSRA_STM_FAMILY" == "" || "$FSRA_PROJECT_NAME" 
 fi
 
 # flash it using openocd
-$FSRA_OPENOCD -f interface/stlink.cfg -f "target/$FSRA_STM_FAMILY" -c "program build/$FSRA_PROJECT_NAME.elf verify reset exit"
+$FSRA_OPENOCD -f interface/stlink.cfg -f "target/$FSRA_STM_FAMILY.cfg" -c "program build/$FSRA_PROJECT_NAME.elf verify reset exit"
