@@ -31,7 +31,7 @@ you first need to setup the `fsra-build` submodule and the required environment.
 If the repository is brand new, then you need to setup the submodule as
 
 ```bash
-git submodule add git@github.com:nikoloc/fsra-build.git b
+git submodule add git@gitlab.com:nikoloc-fsra/fsra-build-system.git b
 ```
 
 This will initialize the submodule into a directory called `b` (so its less to type).
@@ -156,8 +156,9 @@ work by default in VSCode and Neovim.
 
 ## Example
 
-For the example usage of the build system check out
-[this demo program](https://github.com/nikoloc/can-debugger).
+For the example usage of the build system check out `examples/demo` as well as
+[this demo program](https://gitlab.com/nikoloc-fsra/fsra-build), showcasing more
+advanced setup.
 
 ## TODO
 
