@@ -1,0 +1,3 @@
+export FSRA_PROJECT_NAME=can-debugger
+export FSRA_STM_FAMILY=stm32f0x
+export FSRA_UART_BAUDRATE=115200
