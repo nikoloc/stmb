@@ -1,7 +1,7 @@
 # This is a template for the submodule initialization. This is the idea:
-# - Every submodule needs to have the top-level `module.mk` Makefile fragment, which
+# - Every submodule needs to have the top-level `stmb.mk` Makefile fragment, which
 #   extends the default `C_SOURCES`, `C_INCLUDES` and other variables as needed.
-# - This fragment is then going to be included into the main projects `custom.mk`,
+# - This fragment is then going to be included into the main projects `stmb.mk`,
 #   which will result it the build system compiling and linking the submodule
 #   into the final image.
 
