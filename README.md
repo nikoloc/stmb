@@ -25,12 +25,6 @@ Optionally, you may install `tio` (Unix only) for monitoring of UART ports.
 
 All the relevant actions can be found in the provided bash script.
 
-## Installation
-
-The installation instructions for all the platforms used and tested are kept in
-the appropriate `INSTALL-*.md` files. You should consult the file aimed at your
-platform.
-
 ## Setup
 
 After making or obtaining a project and installing the software required above,
@@ -128,8 +122,8 @@ For an example, checkout `examples/module.mk` and `examples/stmb.mk`.
 
 In order to have the LSP Support you need to provide the LSP with the relevant
 info about the project in `compile_commands.json`. We use `compiledb` in order
-to generate it from our Makefile, which is included in our build step. It should
-work by default in VSCode and Neovim.
+to generate it from our `Makefile`, which is included in our build step. It should
+work by default in `VSCode` (using the `Clangd` extension) and `Neovim`.
 
 ## Examples
 
