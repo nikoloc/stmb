@@ -38,9 +38,16 @@ you first need to setup the `stmb` build system. You can either install the
 `stmb.sh` globally (by putting it somewhere in your path) or locally (by copying
 the provied `stmb.sh` file directly into the project).
 
+You may generate the default template configuration file `stmb.conf` and the
+`Makefile` fragment `stmb.mk` by running
+
+```bash
+./stmb.sh init
+```
+
 You will then need to setup the configuration for they build system. This is
 done by setting the following environment variables inside `stmb.conf` in
-the root of the project:
+the root of the project.
 
 - `STMB_BOARD` - Family of microcontroller, info used by `openocd` in order to
   properly flash the code onto a mcu. The full list of supported hardware can be
@@ -51,8 +58,8 @@ the root of the project:
 - `STMB_BAUDRATE` - Baudrate for the UART device communication. Only needed if
   `tio` is to be used for communication. If its not used, it can be left undefined.
 
-Here, you can also provide the system with the required binary names if they
-differ from the standard. The build system depends on the next few binaries, which
+You can also provide the system with the required binary names if they differ
+from the standard. The build system depends on the next few binaries, which
 should be installed and their executable names set in the following environment
 variables:
 
@@ -61,12 +68,12 @@ variables:
   for the LSP support inside of code editors. Defaults to `compiledb`.
 - `STMB_OPENOCD` - [openocd](https://openocd.org/) - cross-platform tool used to
   flash our code onto a board. Defaults to `openocd`.
-- `STM_TIO` - [tio](https://github.com/tio/tio) Optional Unix only program for
-  serial communication over UART, used only in the `uart.sh` script. Defaults to
+- `STMB_TIO` - [tio](https://github.com/tio/tio) Optional Unix only program for
+  serial communication over UART, used only for `uart` command. Defaults to
   `tio`.
 
 If you are on Windows, then the recommended way is to setup a package manager,
-such as `scoop`, and install the required sofware through it. That way you get
+such as `scoop`, and install the required software through it. That way you get
 full compatibility with Unix systems, on which the build system is primarly
 developed and tested.
 
