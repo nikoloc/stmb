@@ -2,7 +2,7 @@
 
 This is a project I used for debugging the CAN communcation on a board that caused
 me troubles, but more importantly it was simultaneously used to test, develop
-and improve the [fsra-build](https://gitlab.com/nikoloc-fsra/fsra-build-system)
+and improve the [stmb](https://gitlab.com/nikoloc-fsra/fsra-build-system)
 build system, hence it will also server as a base reference of how to use it in
 other projects.
 
@@ -19,12 +19,7 @@ is created and populated to add our include and source paths. As explained in
 the `stmb` README, many other options exist here, like adding custom scripts,
 targets, preprocessor defines etc. The scope of this demo project is kept
 relatively small, hence only the needed include and source options are
-extended. It would be a good idea to have a lot of the commonly used stuff
-extracted into another `contrib/` directory in `stmb`, so everytime
-you add something new to your project, you also put it in there, for future
-reference to others. Example would be a target that generates the `.srec` files
-for the bootloader, since that is a fairly common thing we do, and others will
-find it useful.
+extended.
 
 Another integral part of the project is `stmb.conf`. Here, we define the project
 configuration, like family of microcontrollers, UART baudrate etc. This file is

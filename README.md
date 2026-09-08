@@ -25,6 +25,12 @@ Optionally, you may install `tio` (Unix only) for monitoring of UART ports.
 
 All the relevant actions can be found in the provided bash script.
 
+## Installation
+
+The installation instructions for all the platforms used and tested are kept in
+the appropriate `INSTALL-*.md` files. You should consult the file aimed at your
+platform.
+
 ## Setup
 
 After making or obtaining a project and installing the software required above,
@@ -118,7 +124,7 @@ info about the project in `compile_commands.json`. We use `compiledb` in order
 to generate it from our Makefile, which is included in our build step. It should
 work by default in VSCode and Neovim.
 
-## Example
+## Examples
 
 For the example usage of the build system check out `examples/demo` as well as
 [this demo program](https://gitlab.com/nikoloc-fsra/fsra-build), showcasing more
