@@ -5,7 +5,7 @@ set -e
 
 check() {
     local cmd="$1"
-    
+
     if command -v "$cmd" >/dev/null 2>&1; then
         echo "$cmd"
         return 0
@@ -92,7 +92,7 @@ clean() {
     local make=$(get_make)
 
     $make clean
-    rm compile_commands.json
+    rm -f compile_commands.json
 }
 
 build() {
@@ -124,9 +124,48 @@ flash() {
     # note: if these are on the same line then 'set -e' does not work, so we have to separete them on two lines :/ idk, bash
     local board
     board=$(get_board)
-    
+
     # TODO: make the actions customizable
     $openocd -f interface/stlink.cfg -f target/$board.cfg -c "program build/$project_name.elf verify reset exit"
+}
+
+get_gdb() {
+    local cmd="${STMB_GDB:-arm-none-eabi-gdb}"
+    check "$cmd"
+}
+
+debug-server() {
+    local openocd=$(get_openocd)
+    local gdb=$(get_gdb)
+    local project_name=$(get_project_name)
+
+    # note: same as above
+    local board
+    board=$(get_board)
+
+    $openocd -f interface/stlink.cfg -f target/$board.cfg -c "init; reset halt"
+}
+
+debug() {
+    local openocd=$(get_openocd)
+    local gdb=$(get_gdb)
+    local project_name=$(get_project_name)
+
+    # note: same as above
+    local board
+    board=$(get_board)
+
+    # start the openocd server in the background and ensure its killed on exit
+    $openocd -f interface/stlink.cfg -f target/$board.cfg -c "init; reset halt" > /dev/null 2>&1 &
+    local openocd_pid=$!
+    trap "kill $openocd_pid >/dev/null 2>&1 || true" EXIT
+
+    # start the debugger interactively
+    $gdb "build/$project_name.elf" \
+        --eval-command "target remote :3333" \
+        --eval-command "monitor reset halt" \
+        --eval-command "load" \
+        --eval-command "monitor reset init"
 }
 
 get_baudrate() {
@@ -160,6 +199,12 @@ case "$1" in
     flash)
         flash
         ;;
+    debug)
+        debug
+        ;;
+    debug-server)
+        debug-server
+        ;;
     uart)
         uart
         ;;
@@ -167,7 +212,7 @@ case "$1" in
         clean
         ;;
     *)
-        echo "usage: $0 {init|build|flash|uart|clean}" >&2
+        echo "usage: $0 {init|build|flash|debug|debug-server|uart|clean}" >&2
         exit 1
         ;;
 esac

@@ -1,0 +1,55 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug With OpenOCD",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/program.elf",
+      "MIMode": "gdb",
+      "miDebuggerPath": "arm-none-eabi-gdb",
+      "miDebuggerServerAddress": "localhost:3333",
+      "cwd": "${workspaceFolder}",
+      "setupCommands": [
+        {
+          "text": "target remote localhost:3333"
+        },
+        {
+          "text": "monitor reset halt"
+        },
+        {
+          "text": "thbreak main"
+        }
+      ],
+      "launchCompleteCommand": "exec-continue"
+    },
+    {
+      "name": "Flash And Debug With OpenOCD",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/program.elf",
+      "MIMode": "gdb",
+      "miDebuggerPath": "arm-none-eabi-gdb",
+      "miDebuggerServerAddress": "localhost:3333",
+      "cwd": "${workspaceFolder}",
+      "setupCommands": [
+        {
+          "text": "target remote localhost:3333"
+        },
+        {
+          "text": "monitor reset halt"
+        },
+        {
+          "text": "load"
+        },
+        {
+          "text": "monitor reset init"
+        },
+        {
+          "text": "thbreak main"
+        }
+      ],
+      "launchCompleteCommand": "exec-continue"
+    }
+  ]
+}

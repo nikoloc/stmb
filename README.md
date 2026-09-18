@@ -93,6 +93,27 @@ is EXTREMELY FAST. Will need to be tested on Windows and adjusted as needed.
 > Note: This will not build the latest image if there have been any changes. You
 > need to do that before manually.
 
+## Debugging
+
+`openocd` provides a `gdbserver` for remote debugging. The script provides two
+helper commands called `debug` and `debug-server`. Calling
+
+```bash
+./stmb.sh debug
+```
+
+starts up `openocd`, resets the target, halts the CPU and start an interactive
+`gdb` session. From there you can, for example, `break main` and `continue`, to
+arrive at the main function.
+
+```bash
+./stmb.sh debug-server
+```
+
+starts up `openocd`, resets the target and waits for remote `gdb` connection. This
+is meant to be used with external DAP (Debug Adaptor Protocol) client, provided
+by your editor of choice.
+
 ## Adding custom sources
 
 If you want to add a new source file, or to include a new include directory
@@ -134,7 +155,6 @@ advanced setup.
 ## TODO
 
 - Test the process on Windows and MacOS. Add more documentation for those platforms.
-- Add debugger support.
 - Add `.vscode` shenanigans for better integration with `Visual Studio Code`, for
   quick actions, debugger etc.
 - Write a function for searching for the right ports for UART communication.
