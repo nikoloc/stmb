@@ -134,38 +134,59 @@ get_gdb() {
     check "$cmd"
 }
 
-debug-server() {
+start_openocd() {
     local openocd=$(get_openocd)
-    local gdb=$(get_gdb)
-    local project_name=$(get_project_name)
-
-    # note: same as above
-    local board
-    board=$(get_board)
-
-    $openocd -f interface/stlink.cfg -f target/$board.cfg -c "init; reset halt"
-}
-
-debug() {
-    local openocd=$(get_openocd)
-    local gdb=$(get_gdb)
-    local project_name=$(get_project_name)
-
-    # note: same as above
-    local board
-    board=$(get_board)
 
     # start the openocd server in the background and ensure its killed on exit
     $openocd -f interface/stlink.cfg -f target/$board.cfg -c "init; reset halt" > /dev/null 2>&1 &
     local openocd_pid=$!
     trap "kill $openocd_pid >/dev/null 2>&1 || true" EXIT
+}
 
+get_telnet() {
+    if [[ "$STMB_TELNET" != "" ]]; then
+        check "$STMB_TELNET"
+        return 0
+    elif command -v "telnet" >/dev/null 2>&1; then
+        echo "telnet"
+        return 0
+    elif command -v "netcat" >/dev/null 2>&1; then
+        echo "netcat"
+        return 0
+    elif command -v "nc" >/dev/null 2>&1; then
+        echo "nc"
+        return 0
+    fi
+
+    echo "error: 'telnet' not found" >&2
+    return 1
+}
+
+debug_server() {
+    local telnet=$(get_telnet)
+
+    # note: same as above
+    local board
+    board=$(get_board)
+
+    start_openocd
+    # start a telnet connection in this terminal session, 4444 is the default port
+    $telnet localhost 4444
+}
+
+debug() {
+    local gdb=$(get_gdb)
+    local project_name=$(get_project_name)
+
+    # note: same as above
+    local board
+    board=$(get_board)
+
+    start_openocd
     # start the debugger interactively
     $gdb "build/$project_name.elf" \
         --eval-command "target remote :3333" \
-        --eval-command "monitor reset halt" \
-        --eval-command "load" \
-        --eval-command "monitor reset init"
+        --eval-command "monitor reset halt"
 }
 
 get_baudrate() {
@@ -203,7 +224,7 @@ case "$1" in
         debug
         ;;
     debug-server)
-        debug-server
+        debug_server
         ;;
     uart)
         uart
