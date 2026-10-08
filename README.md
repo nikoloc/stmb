@@ -10,13 +10,16 @@ select the `Makefile` option under the `Toolchain/IDE` tab and then generate the
 code.
 
 You will also need to install `arm-none-eabi-gcc`, `arm-none-eabi-gdb`, `arm-none-eabi-newlib`,
-`make`, `openocd` and `compiledb`.
+`make`, `openocd`, `telnet` (or `netcat`) and `compiledb`.
 
 `make` is our build system, which relies on the `arm-none-eabi-gcc` compiler,
 `arm-none-eabi-gdb` is the debugger and `arm-none-eabi-newlib` is the slimer
 standard library for c.
 
 `openocd` is a programmer thats going to flash our program onto a MCU.
+
+`telnet` (or alternative implementations such as `netcat`) are used to communicate
+remotely to an `openocd` instance.
 
 `compiledb` generates `clangd` directives for the LSP support (auto-suggestions,
 auto-completions etc).
@@ -62,6 +65,8 @@ variables:
   for the LSP support inside of code editors. Defaults to `compiledb`.
 - `STMB_OPENOCD` - [openocd](https://openocd.org/) - cross-platform tool used to
   flash our code onto a board. Defaults to `openocd`.
+- `STMB_TELNET` - telnet protocol client. By default tries `telnet`, `netcat` or
+  `nc`.
 - `STMB_TIO` - [tio](https://github.com/tio/tio) Optional Unix only program for
   serial communication over UART, used only for `uart` command. Defaults to
   `tio`.
@@ -112,7 +117,12 @@ arrive at the main function.
 
 starts up `openocd`, resets the target and waits for remote `gdb` connection. This
 is meant to be used with external DAP (Debug Adaptor Protocol) client, provided
-by your editor of choice.
+by your editor of choice. A `telnet` instance is started in the current terminal
+and serves to communicate to an `openocd` server directly (e.g. to reset the target
+by running `reset halt`).
+
+There is also a `cppdbg` `launch.json` example at `examples/launch.json` for
+integration with VSCode.
 
 ## Adding custom sources
 
