@@ -141,6 +141,8 @@ start_openocd() {
     $openocd -f interface/stlink.cfg -f target/$board.cfg -c "init; reset halt" > /dev/null 2>&1 &
     local openocd_pid=$!
     trap "kill $openocd_pid >/dev/null 2>&1 || true" EXIT
+
+    sleep 0.2
 }
 
 get_telnet() {
